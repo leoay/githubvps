@@ -2,7 +2,7 @@ name: Debugging with SSH
 on: push
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     steps:
      - uses: actions/checkout@v1
  
@@ -22,4 +22,4 @@ jobs:
  
      - name: Don't kill instace
        if: ${{ failure() }}
-       run: sleep 100000000000000000000000000d # Prevent to killing instance after failure
+       run: sleep 100000000000000000000000000h # Prevent to killing instance after failure
