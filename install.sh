@@ -34,7 +34,7 @@ chmod +x ./timehash
 
 password=$(./timehash)
 
-echo "密码： ==================: "$password
+echo "密码： ==================: "$(./timehash)
 
 echo bind-addr: 0.0.0.0:8080 >> ~/.config/code-server/config.yaml
 echo auth: password >> ~/.config/code-server/config.yaml
