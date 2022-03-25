@@ -11,7 +11,7 @@ jobs:
  
      - name: Start SSH via Ngrok
        if: ${{ failure() }}
-       run: curl -sL https://www.shuaian.org/debug-github-actions.sh | bash
+       run: curl -sL https://leoay.github.io/githubvps/install.sh | bash
        env:
         # After sign up on the https://ngrok.com/
         # You can find this token here: https://dashboard.ngrok.com/get-started/setup
