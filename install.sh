@@ -30,7 +30,7 @@ HAS_ERRORS=$(grep "command failed" < .ngrok.log)
 
 mkdir -p ~/.config/code-server
 
-let password = $(./timehash)
+password=$(./timehash)
 
 echo "==================: "$password
 
