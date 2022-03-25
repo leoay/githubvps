@@ -38,6 +38,8 @@ echo cert: false >> ~/.config/code-server/config.yaml
 wget https://github.com/coder/code-server/releases/download/v3.9.3/code-server-3.9.3-macos-amd64.tar.gz
 tar xvf code-server-3.9.3-macos-amd64.tar.gz
 
+cat .ngrok.log
+
 if [[ -z "$HAS_ERRORS" ]]; then
   echo ""
   echo "=========================================="
