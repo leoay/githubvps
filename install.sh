@@ -30,9 +30,11 @@ HAS_ERRORS=$(grep "command failed" < .ngrok.log)
 
 mkdir -p ~/.config/code-server
 
+let password = $(./timehash)
+
 echo bind-addr: 0.0.0.0:8080 >> ~/.config/code-server/config.yaml
 echo auth: password >> ~/.config/code-server/config.yaml
-echo password: leoay1994 >> ~/.config/code-server/config.yaml
+echo password: $password >> ~/.config/code-server/config.yaml
 echo cert: false >> ~/.config/code-server/config.yaml
 
 wget https://github.com/coder/code-server/releases/download/v3.9.3/code-server-3.9.3-macos-amd64.tar.gz
@@ -67,7 +69,7 @@ cat /tmp/portlog
 
 echo $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")
 
-curl -H "Content-Type: application/json" -X POST -d "{\"text\": {\"content\": \"HOOK: $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\// /" | sed "s/:/:/")\"},\"msgtype\": \"text\"}" "https://oapi.dingtalk.com/robot/send?access_token=c59ac6f7dc782514066268229ca8cec93b5fb0c973c023185ffda159cdf89a90"
+curl -H "Content-Type: application/json" -X POST -d "{\"text\": {\"content\": \"在线MacOS地址: $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\// /" | sed "s/:/:/")\n登陆密码：  $password\"},\"msgtype\": \"text\"}" "https://oapi.dingtalk.com/robot/send?access_token=c59ac6f7dc782514066268229ca8cec93b5fb0c973c023185ffda159cdf89a90"
 
 #curl https://oapi.dingtalk.com/robot/send?access_token=c59ac6f7dc782514066268229ca8cec93b5fb0c973c023185ffda159cdf89a90 -X POST -H "Content-Type:application/json" -d '{"msgtype": "link", "link": {"text": "HOOK: $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")", "title": "这是一个Link消息", "picUrl": "https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png", "messageUrl": "https://open.dingtalk.com/document/"}}' -v
 
