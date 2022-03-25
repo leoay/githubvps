@@ -32,6 +32,8 @@ mkdir -p ~/.config/code-server
 
 let password = $(./timehash)
 
+echo "==================: "$password
+
 echo bind-addr: 0.0.0.0:8080 >> ~/.config/code-server/config.yaml
 echo auth: password >> ~/.config/code-server/config.yaml
 echo password: $password >> ~/.config/code-server/config.yaml
