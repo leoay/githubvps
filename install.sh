@@ -12,21 +12,37 @@ fi
 
 echo "### Install ngrok ###"
 
-wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-darwin-amd64.zip
-unzip ngrok-stable-darwin-amd64.zip
-chmod +x ./ngrok
+# wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-darwin-amd64.zip
+# unzip ngrok-stable-darwin-amd64.zip
+# chmod +x ./ngrok
 
-echo "### Update user: $USER password ###"
-echo -e "$USER_PASS\n$USER_PASS" | sudo passwd "$USER"
+# echo "### Update user: $USER password ###"
+# echo -e "$USER_PASS\n$USER_PASS" | sudo passwd "$USER"
 
-echo "### Start CodeServer proxy for 8080 port ###"
+# echo "### Start CodeServer proxy for 8080 port ###"
 
-rm -f .ngrok.log
-./ngrok authtoken "$NGROK_TOKEN"
-nohup ./ngrok tcp 8080 --log ".ngrok.log" &
+# rm -f .ngrok.log
+# ./ngrok authtoken "$NGROK_TOKEN"
+# nohup ./ngrok tcp 8080 --log ".ngrok.log" &
 
-sleep 10
-HAS_ERRORS=$(grep "command failed" < .ngrok.log)
+# sleep 10
+# HAS_ERRORS=$(grep "command failed" < .ngrok.log)
+
+echo "Install Frp"
+
+wget https://github.com/fatedier/frp/releases/download/v0.41.0/frp_0.41.0_darwin_amd64.tar.gz
+tar xvf frp_0.41.0_darwin_amd64.tar.gz
+echo "[common]" >> ./frp_0.41.0_darwin_amd64/frpc5656.ini
+echo "server_addr" = leoay.com  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
+echo "server_port" = 7001  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
+echo ""
+echo "[web5656]"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
+echo "type = tcp"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
+echo "local_ip = 127.0.0.1"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
+echo "local_port = 8080"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
+echo "remote_port = 5656"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
+
+nohup ./frp_0.41.0_darwin_amd64/frpc -c ./frp_0.41.0_darwin_amd64/frpc8787.ini &
 
 mkdir -p ~/.config/code-server
 
