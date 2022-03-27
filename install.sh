@@ -32,7 +32,7 @@ echo "Install Frp"
 
 wget https://github.com/fatedier/frp/releases/download/v0.41.0/frp_0.41.0_darwin_amd64.tar.gz
 tar xvf frp_0.41.0_darwin_amd64.tar.gz
-echo "[common]" >> ./frp_0.41.0_darwin_amd64/frpc5656.ini
+echo "[common]" >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 echo "server_addr" = leoay.com  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 echo "server_port" = 7001  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 echo ""
