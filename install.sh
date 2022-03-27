@@ -44,6 +44,8 @@ echo "remote_port = 5656"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 
 nohup ./frp_0.41.0_darwin_amd64/frpc -c ./frp_0.41.0_darwin_amd64/frpc8787.ini &
 
+echo "=========process:" $(ps -ef | grep frpc)
+
 mkdir -p ~/.config/code-server
 
 chmod +x ./timehash
