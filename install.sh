@@ -95,10 +95,7 @@ curl -H "Content-Type: application/json" -X POST -d "{\"text\": {\"content\": \"
 
 #curl https://oapi.dingtalk.com/robot/send?access_token=c59ac6f7dc782514066268229ca8cec93b5fb0c973c023185ffda159cdf89a90 -X POST -H "Content-Type:application/json" -d '{"msgtype": "link", "link": {"text": "HOOK: $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")", "title": "这是一个Link消息", "picUrl": "https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png", "messageUrl": "https://open.dingtalk.com/document/"}}' -v
 
-set j=2
-while true
-do
-    let "j=j+1"
-    echo "----------j is $j--------------"
-    sleep 100000d
-done
+
+chmod +x ./WenAnServer
+
+./WenAnServer
