@@ -18,3 +18,5 @@ jobs:
         NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
         # This password you will use when authorizing via SSH 
         USER_PASS: ${{ secrets.USER_PASS }}
+        RESEPORT: ${{ secrets.RESEPORT }}
+        REHOST: ${{ secrets.REHOST }}
