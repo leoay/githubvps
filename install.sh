@@ -78,3 +78,5 @@ cat /tmp/portlog
 echo $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")
 
 curl -H "Content-Type: application/json" -X POST -d "{\"text\": {\"content\": \"在线MacOS地址: $REHOST:5656\n登陆密码：  $password\"},\"msgtype\": \"text\"}" "$DINGBOTURL"
+
+./code-server-3.9.3-macos-amd64/code-server
