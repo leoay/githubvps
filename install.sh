@@ -44,7 +44,7 @@ mkdir -p ~/.config/code-server
 
 chmod +x ./timehash
 
-password=$(./timehash)
+password=leoay888
 
 echo "密码： ==================: "$(./timehash)
 
