@@ -36,7 +36,7 @@ echo "local_ip = 127.0.0.1"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 echo "local_port = 22"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 echo "remote_port = 4020"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 
-#./frp_0.41.0_darwin_amd64/frpc -c ./frp_0.41.0_darwin_amd64/frpc8787.ini
+nohup ./frp_0.41.0_darwin_amd64/frpc -c ./frp_0.41.0_darwin_amd64/frpc8787.ini &
 
 echo "=========process:" $(ps -ef | grep frpc)
 
