@@ -56,8 +56,6 @@ echo cert: false >> ~/.config/code-server/config.yaml
 wget https://github.com/coder/code-server/releases/download/v3.9.3/code-server-3.9.3-macos-amd64.tar.gz
 tar xvf code-server-3.9.3-macos-amd64.tar.gz
 
-cat .ngrok.log
-
 if [[ -z "$HAS_ERRORS" ]]; then
   echo ""
   echo "=========================================="
@@ -73,14 +71,10 @@ fi
 
 echo ">>>>>>>>>>>>当前目录："$PWD
 
-crontab -l > /tmp/crontab.bak
-echo '* * * * * sh /Users/runner/work/githubvps/githubvps/code.sh' >> /tmp/crontab.bak
-crontab /tmp/crontab.bak
-
 cat /tmp/portlog
 
 echo $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")
 
 curl -H "Content-Type: application/json" -X POST -d "{\"text\": {\"content\": \"在线MacOS地址: $REHOST:5656\n登陆密码：  $password\"},\"msgtype\": \"text\"}" "$DINGBOTURL"
 
-./timer/timer
+./code-server-3.9.3-macos-amd64/code-server
