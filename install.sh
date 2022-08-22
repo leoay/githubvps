@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo ----------------`who am I`-----------------------
+
+echo `PWD`
+
 if [[ -z "$NGROK_TOKEN" ]]; then
   echo "Please set 'NGROK_TOKEN'"
   exit 2
@@ -14,6 +18,8 @@ echo "Install Frp"
 
 wget https://github.com/fatedier/frp/releases/download/v0.41.0/frp_0.41.0_darwin_amd64.tar.gz
 tar xvf frp_0.41.0_darwin_amd64.tar.gz
+
+
 
 echo "[common]" >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 echo "server_addr" = $REHOST >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
@@ -34,51 +40,49 @@ echo "remote_port = 4020"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 
 ./frp_0.41.0_darwin_amd64/frpc -c ./frp_0.41.0_darwin_amd64/frpc8787.ini
 
-# echo "=========process:" $(ps -ef | grep frpc)
+echo "=========process:" $(ps -ef | grep frpc)
 
-# mkdir -p ~/.config/code-server
+mkdir -p ~/.config/code-server
 
-# chmod +x ./timehash
+chmod +x ./timehash
 
-# password=$(./timehash)
+password=$(./timehash)
 
-# echo "密码： ==================: "$(./timehash)
+echo "密码： ==================: "$(./timehash)
 
-# echo bind-addr: 0.0.0.0:8080 >> ~/.config/code-server/config.yaml
-# echo auth: password >> ~/.config/code-server/config.yaml
-# echo password: $password >> ~/.config/code-server/config.yaml
-# echo cert: false >> ~/.config/code-server/config.yaml
+echo bind-addr: 0.0.0.0:8080 >> ~/.config/code-server/config.yaml
+echo auth: password >> ~/.config/code-server/config.yaml
+echo password: $password >> ~/.config/code-server/config.yaml
+echo cert: false >> ~/.config/code-server/config.yaml
 
-# wget https://github.com/coder/code-server/releases/download/v3.9.3/code-server-3.9.3-macos-amd64.tar.gz
-# tar xvf code-server-3.9.3-macos-amd64.tar.gz
+wget https://github.com/coder/code-server/releases/download/v3.9.3/code-server-3.9.3-macos-amd64.tar.gz
+tar xvf code-server-3.9.3-macos-amd64.tar.gz
 
-# cat .ngrok.log
+cat .ngrok.log
 
-# if [[ -z "$HAS_ERRORS" ]]; then
-#   echo ""
-#   echo "=========================================="
-#   echo "To connect: $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")"
-#   echo "=========================================="
+if [[ -z "$HAS_ERRORS" ]]; then
+  echo ""
+  echo "=========================================="
+  echo "To connect: $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")"
+  echo "=========================================="
 
-#   echo "To connect: $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")" > /tmp/portlog
+  echo "To connect: $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")" > /tmp/portlog
 
-# else
-#   echo "$HAS_ERRORS"
-#   exit 4
-# fi
+else
+  echo "$HAS_ERRORS"
+  exit 4
+fi
 
-# echo ">>>>>>>>>>>>当前目录："$PWD
+echo ">>>>>>>>>>>>当前目录："$PWD
 
-# nohup ./code-server-3.9.3-macos-amd64/code-server &
+nohup ./code-server-3.9.3-macos-amd64/code-server &
 
-# wget https://www.shuaian.org/starcodeserver.sh
+crontab -l > /tmp/crontab.bak
+echo '* * * * * sh /Users/runner/work/githubvps/githubvps/starcodeserver.sh' >> /tmp/crontab.bak
+crontab /tmp/crontab.bak
 
-# crontab -l > /tmp/crontab.bak
-# echo '* * * * * sh /Users/runner/work/githubvps/githubvps/starcodeserver.sh' >> /tmp/crontab.bak
-# crontab /tmp/crontab.bak
+cat /tmp/portlog
 
-# cat /tmp/portlog
+echo $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")
 
-# echo $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")
-
-# curl -H "Content-Type: application/json" -X POST -d "{\"text\": {\"content\": \"在线MacOS地址: $REHOST:5656\n登陆密码：  $password\"},\"msgtype\": \"text\"}" "$DINGBOTURL"
+curl -H "Content-Type: application/json" -X POST -d "{\"text\": {\"content\": \"在线MacOS地址: $REHOST:5656\n登陆密码：  $password\"},\"msgtype\": \"text\"}" "$DINGBOTURL"
