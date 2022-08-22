@@ -26,7 +26,7 @@ echo "local_port = 8080"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 echo "remote_port = 5656"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 
 echo ""
-echo "[ssh]"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
+echo "[ssh1]"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 echo "type = tcp"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 echo "local_ip = 127.0.0.1"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
 echo "local_port = 22"  >> ./frp_0.41.0_darwin_amd64/frpc8787.ini
